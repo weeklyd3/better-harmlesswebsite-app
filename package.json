@@ -1,0 +1,14 @@
+{
+  "name": "harmlesswebsite-improved",
+  "version": "1.0.0",
+  "description": "Better harmlesswebsite app",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "author": "The Feeway entrance Fart I 280 Barf group",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "electron": "^18.2.3"
+  }
+}

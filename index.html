@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html><head><link rel="stylesheet" href="https://harmlesswebsite.leoshi6.repl.co/style.css" /><title id="taitl">Harmlesswebsite</title>
+    <style>
+        body {
+            font-family: system-ui;
+        }
+        input, button, select {
+            font-size: inherit;
+            font-family: inherit;
+            color: black;
+            padding: 7px;
+            margin: 3px;
+            border-radius: 5px;
+            border: 1px solid lightgray;
+            -webkit-box-shadow: 1px 1px 1px 0px #c9c9c9;
+            box-shadow: 1px 1px 1px 0px #d4d4d4;
+            background-color: #f3f2f2;
+            transition: box-shadow 0.5s, -webkit-box-shadow 0.5s, background-color 0.5s;    
+        }
+        .histitem {
+            padding: 7px;
+            cursor: pointer;
+        }
+        .histitem:hover {
+            background-color: lightgray;
+        }
+        .histitem:nth-child(1) {
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+        .histitem:last-child {
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+    </style>
+<script src="https://harmlesswebsite.leoshi6.repl.co/script.js"></script>
+<script src="https://harmlesswebsite.leoshi6.repl.co/level3.js"></script>
+<script src="https://harmlesswebsite.leoshi6.repl.co/level4.js"></script>
+<script src="https://harmlesswebsite.leoshi6.repl.co/level5.js"></script>
+<script src="https://harmlesswebsite.leoshi6.repl.co/level6.js"></script>
+<script src="https://harmlesswebsite.leoshi6.repl.co/loadsave.js"></script>
+<script src="https://harmlesswebsite.leoshi6.repl.co/library.js"></script>
+<script src="bf.js"></script>
+</head>
+<body>
+<div style="font-family: system-ui; position: sticky; top: 0; background-color: cyan; clear: both; padding: 3px;"><button onclick="back(2)">&larr; 2</button> <button onclick="back()">&larr;</button> <button onclick="showHist()">History</button> <button onclick="loadProgress()">⟳</button> <button onclick="document.getElementById('anothergoto').hidden = ''; document.getElementById('gotoform').focus();">Go to...</button> <div style="display: inline-block; background-color: white; border: 1px solid; border-radius: 4px; padding: 7px;">Level <span id="level">1</span>, minilevel <span id="place">1</span></div>
+<span style="float: right;"><button onclick="document.getElementById('startover').hidden = '';">Start over</button></span>
+<div style="clear: both;"></div>
+</div><br />
+<div id="baudy">Loading...</div><div style="font-family: system-ui; padding: 3px;background-color: black; color: white; position: fixed; bottom: 0; left: 0;" id="saving" hidden="hidden"></div>
+<div id="anothergoto" hidden="hidden" style="z-index: 3327; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+    <form id="gotoform" action="javascript:;" style="z-index: 3328; background-color: white; color: black; border: 1px solid; padding: 3px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 75%; height: 75%;" onsubmit="document.getElementById('anothergoto').hidden = 'hidden';safeGoto(parseInt(document.getElementById('leveli').value), JSON.parse(document.getElementById('minileveli').value));">
+        <h2>Go to...</h2>
+        <p>Do you love cheating? Are you just debugging? Well, this form is for you! Fill in the level and mini-level to jump to it directly, or put <code>1</code> and <code>"start"</code> and then press "Load Cheating Tools" for on-page cheating tools.</p>
+        <label>Level (for level 2, enter "1" as well): <input id="leveli" /></label><br />
+        <label>Stage (JSON string or int): <input id="minileveli" /></label>
+        <br />
+    <input type="submit" value="Go" style="font-weight: bold;" />
+    <input type="reset" onclick="document.getElementById('anothergoto').hidden = 'hidden';" value="Cancel" />
+    </form>
+</div>
+<div id="startover" hidden="hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 3327;">
+    <form action="javascript:;" style="z-index: 3328; background-color: white; color: black; border: 1px solid; padding: 3px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 75%; max-height: 75%;" onsubmit="document.getElementById('startover').hidden = 'hidden'; goto(1);">
+        <h2>Start over?</h2>
+        <p>You will permanently lose all of your game progress. You may restore it (if you loooove cheating) by pressing "Go to..." on the top bar.</p>
+    <input type="submit" value="Confirm" style="font-weight: bold;" />
+    <input type="reset" onclick="document.getElementById('startover').hidden = 'hidden';" value="Cancel" />
+    </form>
+</div>
+<div id="history" style="display: none;">
+<h2>History</h2>
+<p>To go back to a point in the game (and delete all history afterwards), click an item below.</p>
+<p>You have <b id="histcount">$ITEMS</b> item(s) in your history. <button onclick="localStorage.setItem('history', '[]'); showHist(); showHist();">Clear history?</button></p>
+<ul id="historyul" style="list-style: none; padding: 0px; border-radius: 5px;"></ul>
+</div>
+</body>
+<script>goto('start', false); loadProgress();</script>
+</html>
