@@ -9,6 +9,7 @@
   "author": "The Feeway entrance Fart I 280 Barf group",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "electron": "^18.2.3"
+    "electron": "^18.2.3",
+    "electron-builder": "^23.0.3"
   }
 }
